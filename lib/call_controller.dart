@@ -5,6 +5,7 @@ import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:http/http.dart' as http;
+import 'package:permission_handler/permission_handler.dart';
 
 const String appId = '24d38bab68d94c138cc5ef08ea07d357';
 
@@ -33,6 +34,8 @@ class CallController {
   }
 
   Future<void> initAgora() async {
+    await [Permission.microphone, Permission.camera].request();
+
     if (roomId == null) {
       await createRoom();
     }
